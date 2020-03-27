@@ -10,8 +10,8 @@ import json
 import numpy as np
 import pretty_midi
 import traceback
+from src.util import *
 from pymongo import MongoClient
-from data_process.util import *
 
 CONFIG = {
     'multicore': 40, # the number of cores to use (1 to disable multiprocessing)
@@ -94,16 +94,6 @@ def convert_midi_files():
         except:
             print(filepath)
             print(traceback.format_exc())
-
-def midi_filter(midi_info):
-    """Return True for qualified midi files and False for unwanted ones"""
-    if midi_info['first_beat_time'] > 0.0:
-        return False
-    elif midi_info['num_time_signature_change'] > 1:
-        return False
-    elif midi_info['time_signature'] not in ['4/4']:
-        return False
-    return True
 
 def get_midi_info(pm):
     """Return useful information from a pretty_midi.PrettyMIDI instance"""
@@ -240,4 +230,4 @@ def merge_tracks():
             print(traceback.format_exc())
 
 if __name__ == '__main__':
-    tempo_unify()
+    add_info_to_database()

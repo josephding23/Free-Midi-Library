@@ -15,25 +15,6 @@ def transpose_tone_mido():
         if msg.is_meta:
             print(msg)
 
-def estimate_key_test():
-    test_stream = converter.parse('./test.mid')
-    estimate_key = test_stream.analyze('key')
-    estimate_tone, estimate_mode = (estimate_key.tonic, estimate_key.mode)
-    c_key = key.Key('C', 'major')
-    c_tone, c_mode = (c_key.tonic, c_key.mode)
-    margin = interval.Interval(estimate_tone, c_tone)
-
-    semitones = margin.semitones
-
-    mid = pretty_midi.PrettyMIDI('test.mid')
-    for instr in mid.instruments:
-        if not instr.is_drum:
-            for note in instr.notes:
-                note.pitch += semitones
-
-    mid.write('test_transposed.mid')
-    print(converter.parse('./test_transposed.mid').analyze('key'))
-
 
 def transpose_to_c():
     root_dir = 'E:/free_midi_library/'
