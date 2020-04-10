@@ -43,40 +43,10 @@ TRACK_INFO = (
 )
 
 
-def get_merged_from_pm(pm):
-    new_pm = pretty_midi.PrettyMIDI()
-
-    drums = pretty_midi.Instrument(0, is_drum=True, name='Drums')
-    piano = pretty_midi.Instrument(0, name='Piano')
-    guitar = pretty_midi.Instrument(24, name='Guitar')
-    bass = pretty_midi.Instrument(32, name='Bass')
-    strings = pretty_midi.Instrument(48, name='Strings')
-
-    for instr in pm.instruments:
-        if instr.is_drum:
-            for note in instr.notes:
-                drums.notes.append(note)
-        elif instr.program//8 == 0:
-            for note in instr.notes:
-                piano.notes.append(note)
-        elif instr.program//8 == 3:
-            for note in instr.notes:
-                guitar.notes.append(note)
-        elif instr.program//8 == 4:
-            for note in instr.notes:
-                bass.notes.append(note)
-        elif instr.program < 96 or 104 <= instr.program < 112:
-            for note in instr.notes:
-                strings.notes.append(note)
-
-    for instr in [drums, piano, guitar, bass, strings]:
-        new_pm.instruments.append(instr)
-    return new_pm
-
-
 def get_midi_collection():
     client = MongoClient(connect=False)
     return client.free_midi.midi
+
 
 def get_music_with_tempo_changes():
     root_dir = 'E:/free_midi_library/'
@@ -103,13 +73,13 @@ def get_tempo(path):
     _, tempo = pm.get_tempo_changes()
     return tempo.tolist()
 
+
 def tempo_unify_and_merge():
-
     midi_collection = get_midi_collection()
-    root_dir = 'E:/transposed_midi/'
-    merged_root_dir = 'E:/merged_midi/'
+    root_dir = 'E:/free_midi_library/transposed_midi/'
+    merged_root_dir = 'E:/free_midi_library/scaled_midi/'
 
-    for midi in midi_collection.find({'MergedAndScaled': False}, no_cursor_timeout = True):
+    for midi in midi_collection.find({'MergedAndScaled': False}, no_cursor_timeout=True):
         original_path = os.path.join(root_dir, midi['Genre'] + '/', midi['md5'] + '.mid')
         try:
             original_tempo = get_tempo(original_path)[0]
@@ -134,6 +104,7 @@ def tempo_unify_and_merge():
             
         except:
             pass
+
 
 def change_tempo_in_metadata():
     test_path = './test4_changed_tempo_dirty.mid'
@@ -162,5 +133,7 @@ def change_tempo_in_metadata():
     pm = pretty_midi.PrettyMIDI(dst_path)
     print(get_tempo(test_path), get_tempo(dst_path))
 
+
 if __name__ == '__main__':
+    # get_midi_collection().update_many({}, {'$set': {'MergedAndScaled': False}})
     tempo_unify_and_merge()

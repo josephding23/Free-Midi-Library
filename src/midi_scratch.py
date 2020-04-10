@@ -346,16 +346,6 @@ def download_free_midi():
     requests.packages.urllib3.disable_warnings()
     session.headers.update(params)
     session.cookies = cookies
-    # session.cookies = http.cookiejar.LWPCookieJar()
-    # r = session.get(root_url, verify=False)
-    # r.close()
-    # session.headers.update(params)
-    # session.cookies.update(cookie_dict)
-    # session.cookies.load(cookie_path, ignore_discard=True)
-    # 3print(session.cookies)
-    # session.cookies = cookie
-    # session.cookies = cookie_dict
-    # opener = request.build_opener(request.HTTPCookieProcessor(cj))
     while midi_collection.count({'Downloaded': False}) != 0:
         for midi in midi_collection.find({'Downloaded': False}, no_cursor_timeout = True):
             performer_link = midi['PerformerUrl']
@@ -408,18 +398,6 @@ def download_free_midi():
                     file_name = name + ' - ' + performer + '.mid'
                     path = dir + '/' +  file_name
                     try:
-                        # cj = http.cookiejar.LWPCookieJar()
-                        # cj.load(cookie_path, ignore_discard=True)
-                        # cookie_handler = request.HTTPCookieProcessor(cj)
-                        # cookie_opener = request.build_opener(cookie_handler)
-
-                        # opener = request.build_opener()
-                        # opener.addheaders = [(key, value) for key, value in download_header.items()]
-                        # cookie_opener.addheaders = [(key, value) for key, value in download_header.items()]
-                        # request.install_opener(opener)
-                        # request.urlretrieve(getter_link, path)
-                        # socket.setdefaulttimeout(4)
-
                         with open(path, 'wb') as output:
                             with session.get(getter_link, allow_redirects=True, verify=False, timeout=20) as r:
                                 if r.history:
