@@ -20,14 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f1ed72c-96f5-4715-8800-1b4cf967fd8b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/test.mid" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tracks_merge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Free-Midi-Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Free-Midi-Library.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/crawler/more_classical.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/midi_scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/midi_scratch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/transpose_tone.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/transpose_tone.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unify_tempo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/unify_tempo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/md5_reorganize.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crawler/md5_reorganize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/midi_scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crawler/midi_scratch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/organize.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/organize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tracks_merge.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/tracks_merge.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transpose_tone.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/transpose_tone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unify_tempo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/unify_tempo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,12 +49,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="y" value="22" />
-    <option name="width" value="976" />
-    <option name="height" value="1066" />
-  </component>
   <component name="ProjectId" id="1aLLU1oKOOmshhbOzMsxPsaohUk" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -63,22 +57,25 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PycharmProjects\FreeMidiLibrary\src\crawler" />
+      <recent name="D:\PycharmProjects\FreeMidiLibrary\src\pre_manipulation" />
+      <recent name="D:\PycharmProjects\FreeMidiLibrary\src" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\PycharmProjects\FreeMidiLibrary\data" />
       <recent name="D:\PycharmProjects\FreeMidiLibrary\src" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\PycharmProjects\FreeMidiLibrary\src" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.tracks_merge">
-    <configuration name="midi_to_npy" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.more_classical">
+    <configuration name="more_classical" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Free-Midi-Library" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -86,12 +83,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/crawler" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/midi_to_npy.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/crawler/more_classical.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -113,7 +110,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/tracks_merge.py" />
+      <option name="SCRIPT_NAME" value="D:\PycharmProjects\FreeMidiLibrary\src\pre_manipulation\tracks_merge.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -135,7 +132,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/transpose_tone.py" />
+      <option name="SCRIPT_NAME" value="D:\PycharmProjects\FreeMidiLibrary\src\pre_manipulation\transpose_tone.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -157,7 +154,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/unify_tempo.py" />
+      <option name="SCRIPT_NAME" value="D:\PycharmProjects\FreeMidiLibrary\src\pre_manipulation\unify_tempo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -179,17 +176,17 @@
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_parameters" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/tracks_merge.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/pre_manipulation/tracks_merge.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.more_classical" />
         <item itemvalue="Python.tracks_merge" />
         <item itemvalue="Python tests.pytest in tracks_merge.py" />
         <item itemvalue="Python.unify_tempo" />
         <item itemvalue="Python.transpose_tone" />
-        <item itemvalue="Python.midi_to_npy" />
       </list>
     </recent_temporary>
   </component>
@@ -226,7 +223,9 @@
       <workItem from="1586272200599" duration="873000" />
       <workItem from="1586309514034" duration="691000" />
       <workItem from="1586326839639" duration="1805000" />
-      <workItem from="1586509942138" duration="1300000" />
+      <workItem from="1586509942138" duration="1430000" />
+      <workItem from="1586518521005" duration="12000" />
+      <workItem from="1586616977418" duration="4312000" />
     </task>
     <servers />
   </component>
@@ -252,30 +251,32 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="183" key="GridCell.Tab.0.bottom" timestamp="1586510645759">
+    <state width="1877" height="306" key="GridCell.Tab.0.bottom" timestamp="1586621348353">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1586510645759" />
-    <state width="1877" height="183" key="GridCell.Tab.0.center" timestamp="1586510645758">
+    <state width="1877" height="306" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1586621348353" />
+    <state width="1877" height="306" key="GridCell.Tab.0.center" timestamp="1586621348353">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1586510645758" />
-    <state width="1877" height="183" key="GridCell.Tab.0.left" timestamp="1586510645758">
+    <state width="1877" height="306" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1586621348353" />
+    <state width="1877" height="306" key="GridCell.Tab.0.left" timestamp="1586621348353">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1586510645758" />
-    <state width="1877" height="183" key="GridCell.Tab.0.right" timestamp="1586510645758">
+    <state width="1877" height="306" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1586621348353" />
+    <state width="1877" height="306" key="GridCell.Tab.0.right" timestamp="1586621348353">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="183" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586510645758" />
+    <state width="1877" height="306" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586621348353" />
     <state x="461" y="199" key="SettingsEditor" timestamp="1586510216431">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="461" y="199" key="SettingsEditor/0.30.1920.1050@0.30.1920.1050" timestamp="1586510216431" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$more_classical.coverage" NAME="more_classical Coverage Results" MODIFIED="1586621309725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
     <SUITE FILE_PATH="coverage/Free_Midi_Library$pytest_in_tracks_merge_py.coverage" NAME="pytest in tracks_merge.py Coverage Results" MODIFIED="1586510515213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Free_Midi_Library$tracks_merge.coverage" NAME="tracks_merge Coverage Results" MODIFIED="1586510645749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>

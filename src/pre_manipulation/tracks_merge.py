@@ -46,10 +46,10 @@ def get_merged_1_track_from_pm(pm, save_path):
 
 
 def run():
-    test_path = '../data/test.mid'
+    test_path = '../../data/test.mid'
     pm = pretty_midi.PrettyMIDI(test_path)
-    get_merged_5_tracks_from_pm(pm, '../data/merged5.mid')
-    get_merged_1_track_from_pm(pm, '../data/merged1.mid')
+    get_merged_5_tracks_from_pm(pm, '../../data/merged5.mid')
+    get_merged_1_track_from_pm(pm, '../../data/merged1.mid')
 
 
 if __name__ == '__main__':
