@@ -45,7 +45,7 @@ TRACK_INFO = (
 
 def get_midi_collection():
     client = MongoClient(connect=False)
-    return client.free_midi.midi
+    return client.classical_midi.midi
 
 
 def get_music_with_tempo_changes():
@@ -76,17 +76,14 @@ def get_tempo(path):
 
 def tempo_unify_and_merge():
     midi_collection = get_midi_collection()
-    root_dir = 'E:/free_midi_library/transposed_midi/'
-    merged_root_dir = 'E:/free_midi_library/scaled_midi/'
+    root_dir = 'E:/classical_midi/transposed/'
+    merged_root_dir = 'E:/classical_midi/scaled/'
 
     for midi in midi_collection.find({'MergedAndScaled': False}, no_cursor_timeout=True):
-        original_path = os.path.join(root_dir, midi['Genre'] + '/', midi['md5'] + '.mid')
+        original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
         try:
             original_tempo = get_tempo(original_path)[0]
             changed_rate = original_tempo / 120
-
-            if not os.path.exists(os.path.join(merged_root_dir, midi['Genre'])):
-                os.mkdir(os.path.join(merged_root_dir, midi['Genre']))
 
             pm = pretty_midi.PrettyMIDI(original_path)
             for instr in pm.instruments:
@@ -94,9 +91,8 @@ def tempo_unify_and_merge():
                     note.start *= changed_rate
                     note.end *= changed_rate
 
-            merged_path = os.path.join(merged_root_dir, midi['Genre'] + '/', midi['md5'] + '.mid')
-            merged = get_merged_from_pm(pm)
-            merged.write(merged_path)
+            merged_path = os.path.join(merged_root_dir + '/', midi['md5'] + '.mid')
+            pm.write(merged_path)
 
             midi_collection.update_one({'_id': midi['_id']}, {'$set': {'MergedAndScaled': True}})
 
@@ -135,5 +131,4 @@ def change_tempo_in_metadata():
 
 
 if __name__ == '__main__':
-    # get_midi_collection().update_many({}, {'$set': {'MergedAndScaled': False}})
-    tempo_unify_and_merge()
+    pass

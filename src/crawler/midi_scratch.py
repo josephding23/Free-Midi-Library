@@ -257,6 +257,7 @@ def free_midi_get_performers():
             {'$set': {'Finished': True}})
         print('Progress: {:.2%}\n'.format(genres_collection.count({'Finished': True}) / genres_collection.count()))
 
+
 def get_free_midi_songs_and_add_performers_info():
     root_url = 'https://freemidi.org/'
     midi_collection = get_midi_collection()

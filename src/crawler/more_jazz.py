@@ -5,15 +5,21 @@ from bs4 import BeautifulSoup
 import traceback
 from random import choice, uniform
 import os
-import re
-import time
 from pymongo import MongoClient
-
+import rarfile
+import time
+import socket
+from urllib import request
+import mido
 import http.cookiejar
 import shutil
 import re
 import hashlib
 
+import http.cookiejar
+import shutil
+import re
+import hashlib
 
 myHeaders = ["Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
              "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
@@ -33,22 +39,32 @@ myHeaders = ["Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowse
              "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52"
              ]
 
+cookie_str = '__gads=ID=2607f7d39e4e6c2c:T=1586704085:S=ALNI_MZFBAUX0zY7d98Btd_p6v4sOXJ-2w; __utma=44119860.798765121.1586703910.1586703910.1586703910.1;' \
+             '__utmb=44119860.3.10.1586703910; __utmc=44119860; __utmz=44119860.1586703910.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)' \
+             'SERVERID108286=102168|XpMyV|XpMuJ'
 
-def get_classical_performer_collection():
+cookie_dict = {
+    '__gads': 'ID=2607f7d39e4e6c2c:T=1586704085:S=ALNI_MZFBAUX0zY7d98Btd_p6v4sOXJ-2w',
+    '__utma': '44119860.798765121.1586703910.1586703910.1586703910.1',
+    '__utmb': '44119860.3.10.1586703910',
+    '__utmc': '44119860',
+    '__utmz': '44119860.1586703910.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)',
+    'SERVERID108286': '102168|XpMyV|XpMuJ'
+}
+
+cookies = requests.utils.cookiejar_from_dict(cookie_dict=cookie_dict, cookiejar=None, overwrite=True)
+
+
+def get_jazz_midi_collection():
     client = MongoClient(connect=False)
-    return client.classical_midi.performers
-
-
-def get_classical_midi_collection():
-    client = MongoClient(connect=False)
-    return client.classical_midi.midi
+    return client.jazz_midi.midi
 
 
 def get_html_text(url, params):
     global attributeErrorNum, httpErrorNum
     try:
         proxy = {'https:': '127.0.0.1:1080', 'http:': '127.0.0.1:1080'}
-        r = requests.get(url, proxies=proxy)
+        r = requests.get(url, proxies=proxy, timeout=10)
 
         r.headers = params
         r.encoding = 'utf-8'
@@ -63,64 +79,70 @@ def get_html_text(url, params):
         print(traceback.format_exc())
 
 
-def acquire_more_classical():
-    composer_dict = {}
+def acquire_more_jazz():
+    midi_collection = get_jazz_midi_collection()
 
-    performer_collection = get_classical_performer_collection()
-    midi_collection = get_classical_midi_collection()
+    params = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
+        'Cookie': cookie_str,
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Host': 'www.acroche2.com',
+        'Connection': 'keep-alive'
+    }
 
-    url = 'http://midi.midicn.com/2000/06/06/%E5%8F%A4%E5%85%B8%E9%9F%B3%E4%B9%90MIDI'
-    text = get_html_text(url, {'User-Agent': choice(myHeaders)})
+    url = 'http://www.acroche2.com/midi_jazz.html'
+    root_url = 'http://www.acroche2.com/'
+
+    text = get_html_text(url, params=params)
     soup = BeautifulSoup(text, 'html.parser')
-    pattern = re.compile(r'<li><a href="([\s\S]*)">([\s\S]*)</a>--([\s\S]*)\((\d+)K\)<br/></li>')
+
+    pattern = re.compile(r'<li><a href="([\s\S]*)" title="([\s\S]*)">([\s\S]*)</a></li>')
+
     for item in soup.find_all(name='li'):
         found_item = re.findall(pattern, (str(item)))
-        if len(found_item) == 0:
-            continue
-        info = found_item[0]
+        if len(found_item) > 0:
+            url = root_url + found_item[0][0]
+            name = found_item[0][1]
 
-        midi_url = info[0].strip()
-        name = info[1].strip()
-        composer_name = info[2].strip()
+            midi_collection.insert_one({
+                'Name': name,
+                'Url': url,
+                'Downloaded': False,
+                'Transposed': False,
+                'MergedAndScaled': False
+            })
 
-        midi_collection.insert_one({
-            'Name': name,
-            'Composer': composer_name,
-            'Url': midi_url,
-            'Downloaded': False
-        })
+            print(url)
 
-        if composer_name not in composer_dict.keys():
-            composer_dict[composer_name] = {
-                'Name': composer_name,
-                'WorksNum': 1,
-                'Works': [name],
-                'WorksUrl': [midi_url]
-            }
-        else:
-            composer_dict[composer_name]['WorksNum'] += 1
-            composer_dict[composer_name]['Works'].append(name)
-            composer_dict[composer_name]['WorksUrl'].append(midi_url)
-
-    for _, item in composer_dict.items():
-        performer_collection.insert_one(item)
+    # print(len(info))
 
 
-def download_classical():
-    midi_collection = get_classical_midi_collection()
-    root_dir = 'E:/classical_midi'
+def download_jazz():
+    midi_collection = get_jazz_midi_collection()
+    root_dir = 'E:/jazz_midi/raw'
 
     m = hashlib.md5()
 
     for midi in midi_collection.find({'Downloaded': False}):
         name = midi['Name']
-        composer = midi['Composer']
         url = midi['Url']
 
-        m.update(bytes(name + ' - ' + composer, 'utf-8'))
+        m.update(bytes(name, 'utf-8'))
         md5Value = m.hexdigest()
 
-        r = requests.get(url, {'User-Agent': choice(myHeaders)})
+        params = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
+            'Cookie': cookie_str,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'Accept-Encoding': 'gzip, deflate',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            'Host': 'www.acroche2.com',
+            'Connection': 'keep-alive'
+        }
+
+        r = requests.get(url, params=params)
         print(r.status_code)
 
         save_path = root_dir + '/' + md5Value + '.mid'
@@ -140,4 +162,4 @@ def download_classical():
 
 
 if __name__ == '__main__':
-    download_classical()
+    download_jazz()

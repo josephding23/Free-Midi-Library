@@ -9,7 +9,7 @@ import math
 
 def get_midi_collection():
     client = MongoClient(connect=False)
-    return client.free_midi.midi
+    return client.classical_midi.midi
 
 def transpose_tone_mido():
     midi = mido.MidiFile('./test.mid')
@@ -19,10 +19,10 @@ def transpose_tone_mido():
 
 
 def get_key_signature():
-    root_dir = 'E:/free_midi_library/raw_midi'
+    root_dir = 'E:/classical_midi/raw'
     midi_collection = get_midi_collection()
     for midi in midi_collection.find({'KeySignature': {'$exists': False}}, no_cursor_timeout=True):
-        original_path = os.path.join(root_dir, midi['Genre'] + '/', midi['md5'] + '.mid')
+        original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
         try:
 
             original_stream = converter.parse(original_path)
@@ -34,8 +34,8 @@ def get_key_signature():
             key_signature = {'Tone': str(estimate_tone), 'Mode': estimate_mode}
             print(key_signature)
 
-            midi_collection.update_many({'Name': midi['Name'], 'Performer': midi['Performer']}, 
-                                        {'$set': {'KeySignature': key_signature}})
+            midi_collection.update_one({'_id': midi['_id']},
+                                       {'$set': {'KeySignature': key_signature}})
 
             print('Progress: {:.2%}\n'.format(midi_collection.count({'KeySignature': {'$exists': True}}) / midi_collection.count()))
 
@@ -62,16 +62,13 @@ def get_key_signature_in_meta():
 
 
 def transpose_to_c():
-    root_dir = 'E:/free_midi_library/raw_midi'
-    transpose_root_dir = 'E:/free_midi_library/transposed_midi/'
+    root_dir = 'E:/classical_midi/raw'
+    transpose_root_dir = 'E:/classical_midi/transposed'
     midi_collection = get_midi_collection()
     for midi in midi_collection.find({'Transposed': False}, no_cursor_timeout=True):
-        original_path = os.path.join(root_dir, midi['Genre'] + '/', midi['md5'] + '.mid')
+        original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
 
-        if not os.path.exists(os.path.join(transpose_root_dir, midi['Genre'])):
-            os.mkdir(os.path.join(transpose_root_dir, midi['Genre']))
-
-        transposed_path = os.path.join(transpose_root_dir, midi['Genre'] + '/', midi['md5'] + '.mid')
+        transposed_path = os.path.join(transpose_root_dir + '/', midi['md5'] + '.mid')
         try:
 
             c_major_key = key.Key('C', 'major')
@@ -113,4 +110,5 @@ def transpose_to_c():
 
 
 if __name__ == '__main__':
+    # get_midi_collection().update_many({}, {'$set': {'Transposed': False}})
     transpose_to_c()
