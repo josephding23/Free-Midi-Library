@@ -20,10 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f1ed72c-96f5-4715-8800-1b4cf967fd8b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/crawler/more_jazz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crawler/midi_scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crawler/midi_scratch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crawler/more_classical.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crawler/more_classical.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/crawler/more_jazz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crawler/more_jazz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pre_manipulation/transpose_tone.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/transpose_tone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pre_manipulation/unify_tempo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/unify_tempo.py" afterDir="false" />
     </list>
@@ -59,7 +57,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -186,8 +184,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.more_jazz" />
-        <item itemvalue="Python.transpose_tone (1)" />
         <item itemvalue="Python.unify_tempo (1)" />
+        <item itemvalue="Python.transpose_tone (1)" />
         <item itemvalue="Python.more_classical" />
         <item itemvalue="Python.tracks_merge" />
       </list>
@@ -230,7 +228,9 @@
       <workItem from="1586518521005" duration="12000" />
       <workItem from="1586616977418" duration="4312000" />
       <workItem from="1586621357107" duration="86000" />
-      <workItem from="1586677121826" duration="9787000" />
+      <workItem from="1586677121826" duration="10200000" />
+      <workItem from="1586741751326" duration="8706000" />
+      <workItem from="1586786241944" duration="4950000" />
     </task>
     <servers />
   </component>
@@ -259,33 +259,33 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="179" key="GridCell.Tab.0.bottom" timestamp="1586708202919">
+    <state width="1877" height="149" key="GridCell.Tab.0.bottom" timestamp="1586794222957">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="179" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1586708202919" />
-    <state width="1877" height="179" key="GridCell.Tab.0.center" timestamp="1586708202919">
+    <state width="1877" height="149" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222957" />
+    <state width="1877" height="149" key="GridCell.Tab.0.center" timestamp="1586794222956">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="179" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1586708202919" />
-    <state width="1877" height="179" key="GridCell.Tab.0.left" timestamp="1586708202919">
+    <state width="1877" height="149" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222956" />
+    <state width="1877" height="149" key="GridCell.Tab.0.left" timestamp="1586794222956">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="179" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1586708202919" />
-    <state width="1877" height="179" key="GridCell.Tab.0.right" timestamp="1586708202919">
+    <state width="1877" height="149" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222956" />
+    <state width="1877" height="149" key="GridCell.Tab.0.right" timestamp="1586794222957">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="179" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586708202919" />
-    <state x="461" y="199" key="SettingsEditor" timestamp="1586510216431">
+    <state width="1877" height="149" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222957" />
+    <state x="461" y="199" key="SettingsEditor" timestamp="1586744886598">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="461" y="199" key="SettingsEditor/0.30.1920.1050@0.30.1920.1050" timestamp="1586510216431" />
+    <state x="461" y="199" key="SettingsEditor/0.30.1920.1050@0.30.1920.1050" timestamp="1586744886598" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Free_Midi_Library$more_classical.coverage" NAME="more_classical Coverage Results" MODIFIED="1586680217785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
-    <SUITE FILE_PATH="coverage/Free_Midi_Library$unify_tempo__1_.coverage" NAME="unify_tempo (1) Coverage Results" MODIFIED="1586696434845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$unify_tempo__1_.coverage" NAME="unify_tempo (1) Coverage Results" MODIFIED="1586752564699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
     <SUITE FILE_PATH="coverage/Free_Midi_Library$pytest_in_tracks_merge_py.coverage" NAME="pytest in tracks_merge.py Coverage Results" MODIFIED="1586510515213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Free_Midi_Library$tracks_merge.coverage" NAME="tracks_merge Coverage Results" MODIFIED="1586510645749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/Free_Midi_Library$transpose_tone__1_.coverage" NAME="transpose_tone (1) Coverage Results" MODIFIED="1586696453620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
-    <SUITE FILE_PATH="coverage/Free_Midi_Library$more_jazz.coverage" NAME="more_jazz Coverage Results" MODIFIED="1586708202912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$transpose_tone__1_.coverage" NAME="transpose_tone (1) Coverage Results" MODIFIED="1586752460762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$more_jazz.coverage" NAME="more_jazz Coverage Results" MODIFIED="1586794348494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
   </component>
 </project>

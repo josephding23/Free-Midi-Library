@@ -9,7 +9,7 @@ import math
 
 def get_midi_collection():
     client = MongoClient(connect=False)
-    return client.classical_midi.midi
+    return client.jazz_midi.midi
 
 def transpose_tone_mido():
     midi = mido.MidiFile('./test.mid')
@@ -19,7 +19,7 @@ def transpose_tone_mido():
 
 
 def get_key_signature():
-    root_dir = 'E:/classical_midi/raw'
+    root_dir = 'E:/jazz_midi/raw'
     midi_collection = get_midi_collection()
     for midi in midi_collection.find({'KeySignature': {'$exists': False}}, no_cursor_timeout=True):
         original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
@@ -62,8 +62,8 @@ def get_key_signature_in_meta():
 
 
 def transpose_to_c():
-    root_dir = 'E:/classical_midi/raw'
-    transpose_root_dir = 'E:/classical_midi/transposed'
+    root_dir = 'E:/jazz_midi/raw'
+    transpose_root_dir = 'E:/jazz_midi/transposed'
     midi_collection = get_midi_collection()
     for midi in midi_collection.find({'Transposed': False}, no_cursor_timeout=True):
         original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
@@ -110,5 +110,7 @@ def transpose_to_c():
 
 
 if __name__ == '__main__':
+    # get_midi_collection().delete_many({'Transposed': False})
+    # get_key_signature()
     # get_midi_collection().update_many({}, {'$set': {'Transposed': False}})
     transpose_to_c()

@@ -15,7 +15,8 @@ import http.cookiejar
 import shutil
 import re
 import hashlib
-
+import pretty_midi
+import mido
 import http.cookiejar
 import shutil
 import re
@@ -39,25 +40,21 @@ myHeaders = ["Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowse
              "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52"
              ]
 
-cookie_str = '__gads=ID=2607f7d39e4e6c2c:T=1586704085:S=ALNI_MZFBAUX0zY7d98Btd_p6v4sOXJ-2w; __utma=44119860.798765121.1586703910.1586703910.1586703910.1;' \
-             '__utmb=44119860.3.10.1586703910; __utmc=44119860; __utmz=44119860.1586703910.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)' \
-             'SERVERID108286=102168|XpMyV|XpMuJ'
+cookie_str = '__gads=ID=2607f7d39e4e6c2c:T=1586704085:S=ALNI_MZFBAUX0zY7d98Btd_p6v4sOXJ-2w; __utma=44119860.798765121.1586703910.1586703910.1586741836.2;' \
+             '__utmb=44119860.1.10.1586741836; __utmc=44119860; __utmz=44119860.1586703910.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)' \
+             'SERVERID108286=102168|XpPCZ|XpPCS;__utmt=1'
 
-cookie_dict = {
-    '__gads': 'ID=2607f7d39e4e6c2c:T=1586704085:S=ALNI_MZFBAUX0zY7d98Btd_p6v4sOXJ-2w',
-    '__utma': '44119860.798765121.1586703910.1586703910.1586703910.1',
-    '__utmb': '44119860.3.10.1586703910',
-    '__utmc': '44119860',
-    '__utmz': '44119860.1586703910.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)',
-    'SERVERID108286': '102168|XpMyV|XpMuJ'
-}
 
-cookies = requests.utils.cookiejar_from_dict(cookie_dict=cookie_dict, cookiejar=None, overwrite=True)
 
 
 def get_jazz_midi_collection():
     client = MongoClient(connect=False)
     return client.jazz_midi.midi
+
+
+def get_midkar_jazz_collection():
+    client = MongoClient(connect=False)
+    return client.jazz_midikar.midi
 
 
 def get_html_text(url, params):
@@ -79,7 +76,7 @@ def get_html_text(url, params):
         print(traceback.format_exc())
 
 
-def acquire_more_jazz():
+def acquire_more_jazz_acroche():
     midi_collection = get_jazz_midi_collection()
 
     params = {
@@ -119,47 +116,262 @@ def acquire_more_jazz():
     # print(len(info))
 
 
-def download_jazz():
-    midi_collection = get_jazz_midi_collection()
-    root_dir = 'E:/jazz_midi/raw'
+def acquire_more_jazz_midkar():
+    midi_collection = get_midkar_jazz_collection()
+    root_url = 'http://midkar.com/jazz'
+
+    crawled_item = []
 
     m = hashlib.md5()
 
+    for page in range(1, 14):
+
+        source_url = 'http://midkar.com/jazz/jazz_' + str(page).zfill(2) + '.html'
+        cookie_str = 'BX=eotmd2df96b5h&b=3&s=m6;sc_is_visitor_unique=rx4375018.1586790157.2B1E41CF9BB14F4C4B3988AFC774B3DD.2.2.2.2.2.2.1.1.1'
+
+        params = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
+            'Cookie': cookie_str,
+            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+            'Accept-Encoding': 'gzip, deflate',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+            'Host': 'www.acroche2.com',
+            'Connection': 'keep-alive',
+            'Referer': source_url
+        }
+
+        text = get_html_text(source_url, params=params)
+        soup = BeautifulSoup(text, 'html.parser')
+
+        pattern = re.compile(r'<a href="(.*).mid">(.*)</a>(<br/>|</b></td>)')
+
+        for item in soup.find_all(name='tr'):
+            # print(str(item), end='\n\n')
+            found_item = re.findall(pattern, (str(item)))
+
+            if len(found_item) != 0:
+                crawled_item.append(found_item)
+                print(found_item[0])
+
+                name = found_item[0][1]
+                url = root_url + '/' + found_item[0][0] + '.mid'
+
+                print(name, '\n', url, '\n')
+
+                m.update(bytes(url, 'utf-8'))
+                md5Value = m.hexdigest()
+
+
+                midi_collection.insert_one({
+                    'Url': url,
+                    'Name': name,
+                    'SourcePage': source_url,
+                    'md5': md5Value,
+                    'Downloaded': False
+                })
+
+
+    print(len(crawled_item))
+    # print(soup)
+
+
+def download_jazz_achroche():
+    midi_collection = get_jazz_midi_collection()
+    root_dir = 'E:/jazz_midi/raw'
+    socket.setdefaulttimeout(3)
+
+
+    m = hashlib.md5()
+    params = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
+        'Cookie': cookie_str,
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Host': 'www.acroche2.com',
+        'Referer': 'http://www.acroche2.com/midi_jazz.html',
+        'Proxy-Connection': 'keep-alive'
+    }
+
+    cookie_dict = {
+        '__gads': 'ID=2607f7d39e4e6c2c:T=1586704085:S=ALNI_MZFBAUX0zY7d98Btd_p6v4sOXJ-2w',
+        '__utma': '44119860.798765121.1586703910.1586703910.1586741836.2',
+        '__utmb': '44119860.2.10.1586741836',
+        '__utmc': '44119860',
+        '__utmz': '44119860.1586703910.1.1.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided)',
+        'SERVERID108286': '102168|XpPE9|XpPCS'
+    }
+
+    cookies = requests.utils.cookiejar_from_dict(cookie_dict=cookie_dict, cookiejar=None, overwrite=True)
+
+    session = requests.Session()
+    requests.packages.urllib3.disable_warnings()
+    session.headers.update(params)
+    session.cookies = cookies
+
     for midi in midi_collection.find({'Downloaded': False}):
         name = midi['Name']
+        url = midi['Url'][24:]
         url = midi['Url']
 
         m.update(bytes(name, 'utf-8'))
         md5Value = m.hexdigest()
 
+        try:
+
+            save_path = root_dir + '/' + md5Value + '.mid'
+
+            with open(save_path, 'wb') as output:
+                r = session.get(url, verify=False, timeout=20)
+                output.write(r.content)
+
+                if r.cookies.get_dict():
+                    print(r.cookies.get_dict())
+                    session.cookies = r.cookies
+                if r.status_code != 200:
+                    print('connection error ' + str(r.status_code))
+
+            time.sleep(uniform(0.2, 0.4))
+
+            try:
+                pm = pretty_midi.PrettyMIDI(save_path)
+
+                midi_collection.update_one(
+                    {'_id': midi['_id']},
+                    {'$set': {
+                        'md5': md5Value,
+                        'Downloaded': True
+                    }}
+                )
+
+            except:
+                pass
+
+            print('Progress: {:.2%}\n'.format(midi_collection.count({'Downloaded': True}) / midi_collection.count()))
+
+        except:
+            print(midi['Url'])
+
+
+def download_jazz_midkar():
+    midi_collection = get_midkar_jazz_collection()
+    root_dir = 'E:/jazz_midkar/raw'
+    socket.setdefaulttimeout(3)
+
+    params = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
+        'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Host': 'www.acroche2.com',
+        'Connection': 'keep-alive',
+        'Referer': 'http://midkar.com/jazz/jazz_01.html'
+    }
+
+    cookies_dict = {
+        'BX': 'eotmd2df96b5h&b=3&s=m6',
+        'sc_is_visitor_unique': 'rx4375018.1586790157.2B1E41CF9BB14F4C4B3988AFC774B3DD.2.2.2.2.2.2.1.1.1'
+    }
+    cookies = requests.utils.cookiejar_from_dict(cookie_dict=cookies_dict, cookiejar=None, overwrite=True)
+
+    session = requests.Session()
+    requests.packages.urllib3.disable_warnings()
+    session.headers.update(params)
+    session.cookies = cookies
+
+    for midi in midi_collection.find({'Downloaded': False}):
+        name = midi['Name']
+        url = midi['Url']
+        source = midi['SourcePage']
+
         params = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
-            'Cookie': cookie_str,
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
             'Accept-Encoding': 'gzip, deflate',
             'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
             'Host': 'www.acroche2.com',
-            'Connection': 'keep-alive'
+            'Connection': 'keep-alive',
+            'Referer': source
         }
 
-        r = requests.get(url, params=params)
-        print(r.status_code)
+        session.headers.update(params)
 
-        save_path = root_dir + '/' + md5Value + '.mid'
+        try:
 
-        with open(save_path, 'wb') as f:
-            f.write(r.content)
-        time.sleep(uniform(0.2, 0.4))
+            save_path = root_dir + '/' + midi['md5'] + '.mid'
+
+            with open(save_path, 'wb') as output:
+                r = session.get(url, verify=False, timeout=20)
+                output.write(r.content)
+
+                if r.cookies.get_dict():
+                    print(r.cookies.get_dict())
+                    session.cookies = r.cookies
+                if r.status_code != 200:
+                    print('connection error ' + str(r.status_code))
+
+            time.sleep(uniform(0.2, 0.4))
+
+            try:
+                pm = pretty_midi.PrettyMIDI(save_path)
+
+                midi_collection.update_one(
+                    {'_id': midi['_id']},
+                    {'$set': {
+                        'Downloaded': True
+                    }}
+                )
+
+            except:
+                pass
+
+            print('Progress: {:.2%}\n'.format(midi_collection.count({'Downloaded': True}) / midi_collection.count()))
+
+        except Exception as e:
+            import traceback
+            print(midi['Url'])
+            print(traceback.format_exc())
+
+
+def add_md5_to_all():
+    midi_collection = get_jazz_midi_collection()
+    m = hashlib.md5()
+    for midi in midi_collection.find({'md5': {'$exists': False}}):
+        name = midi['Name']
+        m.update(bytes(name, 'utf-8'))
+        md5Value = m.hexdigest()
+
         midi_collection.update_one(
             {'_id': midi['_id']},
             {'$set': {
-                'md5': md5Value,
-                'Downloaded': True
+                'md5': md5Value
             }}
         )
 
-        print('Progress: {:.2%}\n'.format(midi_collection.count({'Downloaded': True}) / midi_collection.count()))
 
+def find_not_properly_downloaded():
+
+    midi_collection = get_jazz_midi_collection()
+    root_dir = 'E:/jazz_midi/raw'
+    for midi in midi_collection.find({'Downloaded': True}):
+        path = root_dir + '/' + midi['md5'] + '.mid'
+        print(os.path.getsize(path))
+        '''
+        try:
+            pm = pretty_midi.PrettyMIDI(path)
+            mid = mido.MidiFile(path)
+
+            if os.path.getsize(path) < 1000:
+                print(f'{path} size 0')
+
+        except:
+            print(path)
+            os.remove(path)
+            midi_collection.update_one(
+                {'_id': midi['_id']},
+                {'$set': {'Downloaded': False}}
+            )
+            '''
 
 if __name__ == '__main__':
-    download_jazz()
+    download_jazz_midkar()
