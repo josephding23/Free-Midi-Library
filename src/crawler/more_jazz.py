@@ -254,23 +254,25 @@ def download_jazz_achroche():
 
 
 def download_jazz_midkar():
+    import traceback
+
     midi_collection = get_midkar_jazz_collection()
     root_dir = 'E:/jazz_midkar/raw'
     socket.setdefaulttimeout(3)
 
     params = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
-        'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-        'Host': 'www.acroche2.com',
-        'Connection': 'keep-alive',
+        'Host': 'midkar.com',
+        'Proxy-Connection': 'keep-alive',
         'Referer': 'http://midkar.com/jazz/jazz_01.html'
     }
 
     cookies_dict = {
         'BX': 'eotmd2df96b5h&b=3&s=m6',
-        'sc_is_visitor_unique': 'rx4375018.1586790157.2B1E41CF9BB14F4C4B3988AFC774B3DD.2.2.2.2.2.2.1.1.1'
+        'sc_is_visitor_unique': 'rx4375018.1586828808.2B1E41CF9BB14F4C4B3988AFC774B3DD.4.3.3.3.3.3.2.2.2'
     }
     cookies = requests.utils.cookiejar_from_dict(cookie_dict=cookies_dict, cookiejar=None, overwrite=True)
 
@@ -286,11 +288,11 @@ def download_jazz_midkar():
 
         params = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36',
-            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'Accept-Encoding': 'gzip, deflate',
             'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-            'Host': 'www.acroche2.com',
-            'Connection': 'keep-alive',
+            'Host': 'midkar.com',
+            'Proxy-Connection': 'keep-alive',
             'Referer': source
         }
 
@@ -301,7 +303,7 @@ def download_jazz_midkar():
             save_path = root_dir + '/' + midi['md5'] + '.mid'
 
             with open(save_path, 'wb') as output:
-                r = session.get(url, verify=False, timeout=20)
+                r = session.get(url, verify=False, timeout=5)
                 output.write(r.content)
 
                 if r.cookies.get_dict():
@@ -310,7 +312,8 @@ def download_jazz_midkar():
                 if r.status_code != 200:
                     print('connection error ' + str(r.status_code))
 
-            time.sleep(uniform(0.2, 0.4))
+            time.sleep(uniform(1, 2))
+            print(os.path.getsize(save_path))
 
             try:
                 pm = pretty_midi.PrettyMIDI(save_path)
@@ -321,16 +324,18 @@ def download_jazz_midkar():
                         'Downloaded': True
                     }}
                 )
+                print(
+                    'Progress: {:.2%}\n'.format(midi_collection.count({'Downloaded': True}) / midi_collection.count()))
 
             except:
-                pass
+                print(midi['Url'])
+                print(os.path.getsize(save_path))
+                # print(traceback.format_exc())
 
-            print('Progress: {:.2%}\n'.format(midi_collection.count({'Downloaded': True}) / midi_collection.count()))
 
         except Exception as e:
-            import traceback
             print(midi['Url'])
-            print(traceback.format_exc())
+            # print(traceback.format_exc())
 
 
 def add_md5_to_all():
@@ -351,12 +356,12 @@ def add_md5_to_all():
 
 def find_not_properly_downloaded():
 
-    midi_collection = get_jazz_midi_collection()
-    root_dir = 'E:/jazz_midi/raw'
-    for midi in midi_collection.find({'Downloaded': True}):
+    midi_collection = get_midkar_jazz_collection()
+    root_dir = 'E:/jazz_midkar/raw'
+    for midi in midi_collection.find():
         path = root_dir + '/' + midi['md5'] + '.mid'
-        print(os.path.getsize(path))
-        '''
+        # print(os.path.getsize(path))
+
         try:
             pm = pretty_midi.PrettyMIDI(path)
             mid = mido.MidiFile(path)
@@ -366,12 +371,12 @@ def find_not_properly_downloaded():
 
         except:
             print(path)
-            os.remove(path)
-            midi_collection.update_one(
-                {'_id': midi['_id']},
-                {'$set': {'Downloaded': False}}
+
+            midi_collection.delete_one(
+                {'_id': midi['_id']}
             )
-            '''
+
+
 
 if __name__ == '__main__':
-    download_jazz_midkar()
+    find_not_properly_downloaded()

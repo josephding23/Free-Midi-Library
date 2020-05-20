@@ -9,7 +9,7 @@ import math
 
 def get_midi_collection():
     client = MongoClient(connect=False)
-    return client.jazz_midi.midi
+    return client.jazz_midikar.midi
 
 def transpose_tone_mido():
     midi = mido.MidiFile('./test.mid')
@@ -19,7 +19,7 @@ def transpose_tone_mido():
 
 
 def get_key_signature():
-    root_dir = 'E:/jazz_midi/raw'
+    root_dir = 'E:/jazz_midkar/raw'
     midi_collection = get_midi_collection()
     for midi in midi_collection.find({'KeySignature': {'$exists': False}}, no_cursor_timeout=True):
         original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
@@ -62,8 +62,8 @@ def get_key_signature_in_meta():
 
 
 def transpose_to_c():
-    root_dir = 'E:/jazz_midi/raw'
-    transpose_root_dir = 'E:/jazz_midi/transposed'
+    root_dir = 'E:/jazz_midkar/raw'
+    transpose_root_dir = 'E:/jazz_midkar/transposed'
     midi_collection = get_midi_collection()
     for midi in midi_collection.find({'Transposed': False}, no_cursor_timeout=True):
         original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')

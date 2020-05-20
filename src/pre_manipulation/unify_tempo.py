@@ -45,7 +45,7 @@ TRACK_INFO = (
 
 def get_midi_collection():
     client = MongoClient(connect=False)
-    return client.jazz_midi.midi
+    return client.jazz_midikar.midi
 
 
 def get_music_with_tempo_changes():
@@ -76,8 +76,8 @@ def get_tempo(path):
 
 def tempo_unify_and_merge():
     midi_collection = get_midi_collection()
-    root_dir = 'E:/jazz_midi/transposed'
-    merged_root_dir = 'E:/jazz_midi/scaled'
+    root_dir = 'E:/jazz_midkar/transposed'
+    merged_root_dir = 'E:/jazz_midkar/scaled'
 
     for midi in midi_collection.find({'MergedAndScaled': False}, no_cursor_timeout=True):
         original_path = os.path.join(root_dir + '/', midi['md5'] + '.mid')
@@ -130,5 +130,5 @@ def change_tempo_in_metadata():
 
 
 if __name__ == '__main__':
-    # get_midi_collection().update_many({}, {'$set': {'MergedAndScaled': True}})
-    tempo_unify_and_merge()
+    get_midi_collection().update_many({}, {'$set': {'OneInstrNpyGenerated': False}})
+    # tempo_unify_and_merge()

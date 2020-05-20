@@ -70,7 +70,7 @@
       <recent name="D:\PycharmProjects\FreeMidiLibrary\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.more_jazz">
+  <component name="RunManager" selected="Python.unify_tempo (1)">
     <configuration name="more_classical" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Free-Midi-Library" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -183,9 +183,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.more_jazz" />
         <item itemvalue="Python.unify_tempo (1)" />
         <item itemvalue="Python.transpose_tone (1)" />
+        <item itemvalue="Python.more_jazz" />
         <item itemvalue="Python.more_classical" />
         <item itemvalue="Python.tracks_merge" />
       </list>
@@ -230,7 +230,12 @@
       <workItem from="1586621357107" duration="86000" />
       <workItem from="1586677121826" duration="10200000" />
       <workItem from="1586741751326" duration="8706000" />
-      <workItem from="1586786241944" duration="4950000" />
+      <workItem from="1586786241944" duration="6473000" />
+      <workItem from="1586828675081" duration="8778000" />
+      <workItem from="1586852394416" duration="4231000" />
+      <workItem from="1586864542692" duration="1208000" />
+      <workItem from="1586914885636" duration="32000" />
+      <workItem from="1589945734192" duration="1346000" />
     </task>
     <servers />
   </component>
@@ -259,22 +264,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="149" key="GridCell.Tab.0.bottom" timestamp="1586794222957">
+    <state width="1877" height="205" key="GridCell.Tab.0.bottom" timestamp="1586860257872">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222957" />
-    <state width="1877" height="149" key="GridCell.Tab.0.center" timestamp="1586794222956">
+    <state width="1877" height="205" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1586860257872" />
+    <state width="1877" height="205" key="GridCell.Tab.0.center" timestamp="1586860257872">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222956" />
-    <state width="1877" height="149" key="GridCell.Tab.0.left" timestamp="1586794222956">
+    <state width="1877" height="205" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1586860257872" />
+    <state width="1877" height="205" key="GridCell.Tab.0.left" timestamp="1586860257872">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222956" />
-    <state width="1877" height="149" key="GridCell.Tab.0.right" timestamp="1586794222957">
+    <state width="1877" height="205" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1586860257872" />
+    <state width="1877" height="205" key="GridCell.Tab.0.right" timestamp="1586860257872">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1877" height="149" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586794222957" />
+    <state width="1877" height="205" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586860257872" />
     <state x="461" y="199" key="SettingsEditor" timestamp="1586744886598">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -282,10 +287,10 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Free_Midi_Library$more_classical.coverage" NAME="more_classical Coverage Results" MODIFIED="1586680217785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
-    <SUITE FILE_PATH="coverage/Free_Midi_Library$unify_tempo__1_.coverage" NAME="unify_tempo (1) Coverage Results" MODIFIED="1586752564699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$unify_tempo__1_.coverage" NAME="unify_tempo (1) Coverage Results" MODIFIED="1586859839345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
     <SUITE FILE_PATH="coverage/Free_Midi_Library$pytest_in_tracks_merge_py.coverage" NAME="pytest in tracks_merge.py Coverage Results" MODIFIED="1586510515213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Free_Midi_Library$tracks_merge.coverage" NAME="tracks_merge Coverage Results" MODIFIED="1586510645749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/Free_Midi_Library$transpose_tone__1_.coverage" NAME="transpose_tone (1) Coverage Results" MODIFIED="1586752460762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
-    <SUITE FILE_PATH="coverage/Free_Midi_Library$more_jazz.coverage" NAME="more_jazz Coverage Results" MODIFIED="1586794348494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$transpose_tone__1_.coverage" NAME="transpose_tone (1) Coverage Results" MODIFIED="1586857843523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pre_manipulation" />
+    <SUITE FILE_PATH="coverage/Free_Midi_Library$more_jazz.coverage" NAME="more_jazz Coverage Results" MODIFIED="1586854114700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
   </component>
 </project>
