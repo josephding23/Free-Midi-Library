@@ -69,7 +69,7 @@ def get_music_with_tempo_changes():
 
 def get_tempo(path):
     pm = pretty_midi.PrettyMIDI(path)
-    # tempo_estimated = pm.estimate_tempo()
+    tempo_estimated = pm.estimate_tempo()
     _, tempo = pm.get_tempo_changes()
     return tempo.tolist()
 

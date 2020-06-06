@@ -105,7 +105,7 @@ def transpose_to_c():
             midi_collection.update_one({'_id': midi['_id']}, {'$set': {'Transposed': True}})
             print('Progress: {:.2%}\n'.format(midi_collection.count({'Transposed': True}) / midi_collection.count()))
 
-        except Exception as e:
+        except:
             print(traceback.format_exc())
 
 

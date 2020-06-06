@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f1ed72c-96f5-4715-8800-1b4cf967fd8b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crawler/more_jazz.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/crawler/more_jazz.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pre_manipulation/transpose_tone.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/transpose_tone.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pre_manipulation/unify_tempo.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pre_manipulation/unify_tempo.py" afterDir="false" />
     </list>
@@ -52,12 +52,13 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -235,7 +236,11 @@
       <workItem from="1586852394416" duration="4231000" />
       <workItem from="1586864542692" duration="1208000" />
       <workItem from="1586914885636" duration="32000" />
-      <workItem from="1589945734192" duration="1346000" />
+      <workItem from="1589945734192" duration="2338000" />
+      <workItem from="1590302599401" duration="2419000" />
+      <workItem from="1590375299810" duration="605000" />
+      <workItem from="1591415764499" duration="1825000" />
+      <workItem from="1591417683038" duration="599000" />
     </task>
     <servers />
   </component>
@@ -280,10 +285,10 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state width="1877" height="205" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1586860257872" />
-    <state x="461" y="199" key="SettingsEditor" timestamp="1586744886598">
+    <state x="473" y="178" key="SettingsEditor" timestamp="1591417191284">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="461" y="199" key="SettingsEditor/0.30.1920.1050@0.30.1920.1050" timestamp="1586744886598" />
+    <state x="473" y="178" key="SettingsEditor/0.30.1920.1050@0.30.1920.1050" timestamp="1591417191284" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Free_Midi_Library$more_classical.coverage" NAME="more_classical Coverage Results" MODIFIED="1586680217785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/crawler" />
